@@ -1,9 +1,16 @@
 import { useState, useEffect } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Link,
+  NavLink,
+} from 'react-router-dom';
 import axios from 'axios';
 
+import Header from './components/Header';
+import CourseDetail from './components/CourseDetail';
 // import config from './config';
-
-// import './App.css';
 
 function App() {
   const [data, setData] = useState([]);
@@ -18,13 +25,14 @@ function App() {
   }, []);
 
   return (
-    <div className='App'>
-      <header className='App-header'>
-        {data.map((item) => (
-          <h1>{item.title}</h1>
-        ))}
-      </header>
-    </div>
+    <Router>
+      <div className='App'>
+        <Header />
+        <Switch>
+          <Route path='/courses/:id' component={CourseDetail} />
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

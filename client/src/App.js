@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-import logo from './logo.svg';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -19,7 +17,6 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(data);
   return (
     <div className='App'>
       <header className='App-header'>

@@ -1,27 +1,29 @@
+import { NavLink, Link } from 'react-router-dom';
+
 const CourseDetail = () => {
   return (
     <main>
-      <div class='actions--bar'>
-        <div class='wrap'>
-          <a class='button' href='update-course.html'>
+      <div className='actions--bar'>
+        <div className='wrap'>
+          <Link className='button' to='update-course.html'>
             Update Course
-          </a>
-          <a class='button' href='#'>
+          </Link>
+          <Link className='button' to='#'>
             Delete Course
-          </a>
-          <a class='button button-secondary' href='index.html'>
+          </Link>
+          <a className='button button-secondary' href='index.html'>
             Return to List
           </a>
         </div>
       </div>
 
-      <div class='wrap'>
+      <div className='wrap'>
         <h2>Course Detail</h2>
         <form>
-          <div class='main--flex'>
+          <div className='main--flex'>
             <div>
-              <h3 class='course--detail--title'>Course</h3>
-              <h4 class='course--name'>Build a Basic Bookcase</h4>
+              <h3 className='course--detail--title'>Course</h3>
+              <h4 className='course--name'>Build a Basic Bookcase</h4>
               <p>By Joe Smith</p>
 
               <p>
@@ -74,11 +76,11 @@ const CourseDetail = () => {
               </p>
             </div>
             <div>
-              <h3 class='course--detail--title'>Estimated Time</h3>
+              <h3 className='course--detail--title'>Estimated Time</h3>
               <p>14 hours</p>
 
-              <h3 class='course--detail--title'>Materials Needed</h3>
-              <ul class='course--detail--list'>
+              <h3 className='course--detail--title'>Materials Needed</h3>
+              <ul className='course--detail--list'>
                 <li>1/2 x 3/4 inch parting strip</li>
                 <li>1 x 2 common pine</li>
                 <li>1 x 4 common pine</li>

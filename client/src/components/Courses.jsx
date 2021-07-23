@@ -1,6 +1,11 @@
+import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
+import { CourseContext } from '../Context.js';
+
 const Courses = () => {
+  const { courses, farts } = useContext(CourseContext);
+  console.log(courses);
   return (
     <main>
       <div className='wrap main--grid'>

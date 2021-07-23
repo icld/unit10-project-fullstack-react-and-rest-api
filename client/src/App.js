@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -6,7 +6,7 @@ import {
   Link,
   NavLink,
 } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 
 import Header from './components/Header';
 import Courses from './components/Courses';
@@ -14,16 +14,16 @@ import CourseDetail from './components/CourseDetail';
 // import config from './config';
 
 function App() {
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get('http://localhost:5000/api/courses')
-      .then((response) => setData(response.data))
-      .catch((error) => console.log('Error fetching and parsing data', error));
+  // useEffect(() => {
+  //   axios
+  //     .get('http://localhost:5000/api/courses')
+  //     .then((response) => setData(response.data))
+  //     .catch((error) => console.log('Error fetching and parsing data', error));
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return (
     <Router>

@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // import config from './config';
 
-import './App.css';
+// import './App.css';
 
 function App() {
   const [data, setData] = useState([]);

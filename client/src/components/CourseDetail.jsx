@@ -1,6 +1,17 @@
-import { NavLink, Link } from 'react-router-dom';
+/* eslint-disable no-unused-vars */
+import React, { useContext, useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import { CourseContext } from '../Context.js';
 
-const CourseDetail = () => {
+const CourseDetail = (props) => {
+  const matchId = props.match.params.id;
+  const { courses } = useContext(CourseContext);
+  const [course, setCourse] = useState();
+  setCourse(courses[matchId -1])
+
+
+  // console.log(courses);
+  console.log(courses);
   return (
     <main>
       <div className='actions--bar'>
@@ -11,9 +22,9 @@ const CourseDetail = () => {
           <Link className='button' to='#'>
             Delete Course
           </Link>
-          <a className='button button-secondary' href='index.html'>
+          <Link className='button button-secondary' to='/'>
             Return to List
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -23,7 +34,7 @@ const CourseDetail = () => {
           <div className='main--flex'>
             <div>
               <h3 className='course--detail--title'>Course</h3>
-              <h4 className='course--name'>Build a Basic Bookcase</h4>
+              {/* <h4 className='course--name'>{course.title}</h4> */}
               <p>By Joe Smith</p>
 
               <p>

@@ -1,11 +1,11 @@
+/* eslint-disable no-unused-vars */
 import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 import { CourseContext } from '../Context.js';
 
 const Courses = () => {
-  const { courses, farts } = useContext(CourseContext);
-  console.log(courses);
+  const { courses } = useContext(CourseContext);
   return (
     <main>
       <div className='wrap main--grid'>
@@ -13,6 +13,7 @@ const Courses = () => {
           <Link
             className='course--module course--link'
             to={`/courses/${course.id}`}
+            key={course.id}
           >
             <h2 className='course--label'>Course</h2>
             <h3 className='course--title'>{course.title}</h3>

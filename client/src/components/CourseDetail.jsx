@@ -54,9 +54,10 @@ const CourseDetail = (props) => {
               {course.materialsNeeded ? (
                 <>
                   <h3 className='course--detail--title'>Materials Needed</h3>
-                  <ul className='course--detail--list'>
-                    <ReactMarkdown>{course.materialsNeeded}</ReactMarkdown>
-                  </ul>
+
+                  <ReactMarkdown className='course--detail--list'>
+                    {course.materialsNeeded}
+                  </ReactMarkdown>
                 </>
               ) : null}
             </div>

@@ -6,14 +6,13 @@ import {
   Link,
   NavLink,
 } from 'react-router-dom';
-// import axios from 'axios';
 
 import Header from './components/Header';
 import Courses from './components/Courses';
 import CourseDetail from './components/CourseDetail';
 // import config from './config';
 
-function App() {
+function App(props) {
   return (
     <Router>
       <div className='App'>

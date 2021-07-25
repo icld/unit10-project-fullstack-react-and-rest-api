@@ -26,7 +26,7 @@ const CourseDetail = (props) => {
         }
       })
       .catch((error) => console.log('Error fetching and parsing data', error));
-  }, [id]);
+  }, [id, history]);
 
   console.log(course);
   return (

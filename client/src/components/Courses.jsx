@@ -1,11 +1,15 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 import { CourseContext } from '../Context.js';
 
 const Courses = () => {
-  const { courses } = useContext(CourseContext);
+  const { courses, actions } = useContext(CourseContext);
+  useEffect(() => {
+    actions.getCourses();
+    console.log(courses);
+  }, []);
   return (
     <main>
       <div className='wrap main--grid'>

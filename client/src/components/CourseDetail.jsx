@@ -1,27 +1,34 @@
 /* eslint-disable no-unused-vars */
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { Link, NavLink, useParams } from 'react-router-dom';
+import { Link, NavLink, useParams, useHistory } from 'react-router-dom';
 import { CourseContext } from '../Context.js';
 import ReactMarkdown from 'react-markdown';
 import axios from 'axios';
 
 const CourseDetail = (props) => {
-  const [course, setCourse] = useState([]);
-  let { id } = useParams();
-  let { courses } = useContext(CourseContext);
+  const { id } = useParams();
+  const { courses, actions } = useContext(CourseContext);
+
+  const [course, setCourse] = useState({});
+  const [user, setUser] = useState({});
+
+  const history = useHistory();
 
   useEffect(() => {
-    function handleGetCourse(id) {
-      axios(`http://localhost:5000/api/courses/${id}`)
-        .then((response) => setCourse(response.data))
-        .catch((error) =>
-          console.log('Error fetching and parsing data', error)
-        );
-    }
-
-    return handleGetCourse(id);
+    axios
+      .get(`http://localhost:5000/api/courses/${id}`)
+      .then((response) => {
+        if (response) {
+          setCourse(response.data);
+          setUser(response.data.userInfo);
+        } else {
+          history.push('/notfound');
+        }
+      })
+      .catch((error) => console.log('Error fetching and parsing data', error));
   }, [id]);
 
+  console.log(course);
   return (
     <main>
       <div className='actions--bar'>
@@ -29,7 +36,7 @@ const CourseDetail = (props) => {
           <Link className='button' to='update-course.html'>
             Update Course
           </Link>
-          <Link className='button' to='#'>
+          <Link className='button' onClick={() => actions.deleteCourse} to='#'>
             Delete Course
           </Link>
           <Link className='button button-secondary' to='/'>
@@ -47,8 +54,7 @@ const CourseDetail = (props) => {
               <h3 className='course--detail--title'>Course</h3>
               <h4 className='course--name'>{course.title}</h4>
               <p>
-                By{' '}
-                {/* {`${course.userInformation.firstName} ${course.userInformation.lastName} `} */}
+                {user.firstName} {user.lastName}
               </p>
 
               <ReactMarkdown>{course.description}</ReactMarkdown>

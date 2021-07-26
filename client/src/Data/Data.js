@@ -1,5 +1,4 @@
 import config from './config';
-import axios from 'axios'
 
 export default class Data {
   api(
@@ -58,7 +57,43 @@ export default class Data {
     }
   }
 
-  getCourses()
+  async getCourses() {
+    const res = await this.api('/courses', 'Get');
+    if (res.status === 200) {
+      return res.json().then((data) => data);
+    } else if (res.status === 400) {
+      return null;
+    } else {
+      throw new Error();
+    }
+  }
 
+  async getCourse(id) {
+    const res = await this.api(`/courses/${id}`, 'Get');
 
+    if (res.status === 200) {
+      return res.json().then((data) => data);
+    } else if (res.status === 400) {
+      return null;
+    } else {
+      throw new Error();
+    }
+  }
+
+  // updateCourse() {}
+
+  async deleteCourse(id, username, password) {
+    const res = await this.api(`/courses/${id}`, 'Delete', null, true, {
+      username,
+      password,
+    });
+
+    if (res.status === 204) {
+      return res.json().then((data) => data);
+    } else if (res.status === 403) {
+      return null;
+    } else {
+      throw new Error();
+    }
+  }
 }

@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { Link, NavLink, useParams, useHistory } from 'react-router-dom';
-import { CourseContext } from '../Context.js';
+import { Context } from '../Context/Context';
 import ReactMarkdown from 'react-markdown';
 import axios from 'axios';
 
 const CourseDetail = (props) => {
+  const { data, authenticatedUser, actions } = useContext(Context);
   const { id } = useParams();
-  const { courses, actions } = useContext(CourseContext);
 
   const [course, setCourse] = useState({});
   const [user, setUser] = useState({});
@@ -15,18 +15,35 @@ const CourseDetail = (props) => {
   const history = useHistory();
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/api/courses/${id}`)
-      .then((response) => {
-        if (response) {
-          setCourse(response.data);
-          setUser(response.data.userInfo);
+    async function fetchData() {
+      data
+        .getCourse(id)
+        .then((res) => {
+          if (res) {
+            setCourse(res);
+            setUser(res.userInfo);
+          } else {
+            history.push('/notfound');
+          }
+        })
+        .catch(() => history.push('/error'));
+    }
+    fetchData();
+  }, []);
+
+  const deleteCourse = () => {
+    data
+      .deleteCourse(id)
+      .then((res) => {
+        if (res) {
+          history.push('/');
+          console.log('course has been deleted');
         } else {
           history.push('/notfound');
         }
       })
-      .catch((error) => console.log('Error fetching and parsing data', error));
-  }, [id, history]);
+      .catch(() => history.push('/error'));
+  };
 
   console.log(course);
   return (
@@ -36,7 +53,7 @@ const CourseDetail = (props) => {
           <Link className='button' to='update-course.html'>
             Update Course
           </Link>
-          <Link className='button' onClick={() => actions.deleteCourse} to='#'>
+          <Link className='button' onClick={() => deleteCourse()} to='/'>
             Delete Course
           </Link>
           <Link className='button button-secondary' to='/'>

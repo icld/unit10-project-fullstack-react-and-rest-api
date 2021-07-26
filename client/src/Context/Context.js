@@ -1,11 +1,11 @@
 import React, { Component, useState } from 'react';
 import Cookies from 'js-cookie';
-import Data from './Data';
+import Data from '../Data/Data';
 
 export const Context = React.createContext();
-const data = new Data();
 
 export const Provider = (props) => {
+  const data = new Data();
   const [authenticatedUser, setAuthenticatedUser] = useState(
     Cookies.getJSON('authenticatedUser') || null
   );

@@ -11,7 +11,7 @@ import {
 import Header from './components/Header';
 import Courses from './components/Courses';
 import CourseDetail from './components/CourseDetail';
-// import config from './config';
+import NotFound from './components/NotFound';
 
 function App(props) {
   return (
@@ -21,6 +21,7 @@ function App(props) {
         <Switch>
           <Route exact path='/' component={Courses} />
           <Route path='/courses/:id' component={CourseDetail} />
+          <Route path='/notfound' component={NotFound} />
         </Switch>
       </div>
     </Router>

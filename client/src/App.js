@@ -8,6 +8,7 @@ import CourseDetail from './components/CourseDetail';
 import UserSignIn from './components/UserSignIn';
 import NotFound from './components/NotFound';
 import Error from './components/Error';
+import Authenticated from './components/Authenticated';
 
 function App(props) {
   return (
@@ -19,6 +20,7 @@ function App(props) {
           <Route path='/courses/:id' component={CourseDetail} />
           <Route path='/signin' component={UserSignIn} />
           <Route path='/error' component={Error} />
+          <Route path='/authenticated' component={Authenticated} />
           <Route component={NotFound} />
         </Switch>
       </div>

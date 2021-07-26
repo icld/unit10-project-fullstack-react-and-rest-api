@@ -12,9 +12,13 @@ const UserSignIn = (props) => {
   const [password, setPassword] = useState();
   const [errors, setErrors] = useState([]);
   const { actions, authenticatedUser } = useContext(Context);
-  console.log(`authneticated user is ${authenticatedUser}`);
-  const handleSubmit = async () => {
-    await actions
+
+  if (authenticatedUser) {
+    console.log(`authneticated user is ${authenticatedUser[0].firstName}`);
+  }
+
+  const handleSubmit = () => {
+    actions
       .signIn(emailAddress, password)
       .then((user) => {
         if (user === null) {
@@ -26,7 +30,7 @@ const UserSignIn = (props) => {
       })
       .catch((error) => {
         console.error(error);
-        history.push('/error');
+        // history.push('/error');
       });
   };
 
@@ -57,7 +61,7 @@ const UserSignIn = (props) => {
   return (
     <main>
       {errors.length > 0 ? <ErrorsDisplay errors={errors} /> : null}
-      <div class='form--centered'>
+      <div className='form--centered'>
         <h2>Sign In</h2>
 
         <form
@@ -90,7 +94,7 @@ const UserSignIn = (props) => {
             Sign In
           </button>
           <button
-            class='button button-secondary'
+            className='button button-secondary'
             onClick={(event) => {
               event.preventDefault();
               history.push('/');

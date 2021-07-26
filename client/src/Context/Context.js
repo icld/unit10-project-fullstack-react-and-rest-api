@@ -15,17 +15,15 @@ export const Provider = (props) => {
     Cookies.getJSON('userPassword') || null
   );
 
-  const signIn = async (username, password) => {
-    const user = await data.getUser(username, password);
+  const signIn = async (emailAddress, password) => {
+    const user = await data.getUser(emailAddress, password);
+    console.log(`here is a ${user}`);
     if (user !== null) {
       setAuthenticatedUser(user);
       setUserPassword(password);
 
-      const cookieOptions = {
-        expires: 1, // 1 day
-      };
-      Cookies.set('authenticatedUser', JSON.stringify(user), { cookieOptions });
-      Cookies.set('userPassword', JSON.stringify(password), { cookieOptions });
+      Cookies.set('authenticatedUser', JSON.stringify(user), { expires: 1 });
+      Cookies.set('userPassword', JSON.stringify(password), { expires: 1 });
     }
     return user;
   };

@@ -29,7 +29,7 @@ const CourseDetail = (props) => {
         .catch(() => history.push('/error'));
     }
     fetchData();
-  }, []);
+  }, [data, id, history]);
 
   const deleteCourse = () => {
     data

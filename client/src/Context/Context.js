@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import React, { useState } from 'react';
 import Cookies from 'js-cookie';
 import Data from '../Data/Data';

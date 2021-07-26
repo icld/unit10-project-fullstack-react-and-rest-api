@@ -1,13 +1,15 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
-import { CourseContext } from '../Context.js';
+import { Context } from '../Context/Context';
 
 const Courses = () => {
-  const { courses, actions } = useContext(CourseContext);
+  const { data, actions, authenticatedUser } = useContext(Context);
+  const [courses, setCourses] = useState([]);
+
   useEffect(() => {
-    actions.getCourses();
+    data.getCourses().then((res) => setCourses(res));
     console.log(courses);
   }, []);
   return (

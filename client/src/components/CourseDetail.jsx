@@ -16,7 +16,7 @@ const CourseDetail = (props) => {
 
   useEffect(() => {
     async function fetchData() {
-      data
+      await data
         .getCourse(id)
         .then((res) => {
           if (res) {

@@ -14,11 +14,12 @@ export const Provider = (props) => {
   const [userPassword, setUserPassword] = useState(
     Cookies.getJSON('userPassword') || null
   );
+
   const signIn = async (username, password) => {
     const user = await data.getUser(username, password);
     if (user !== null) {
       setAuthenticatedUser(user);
-      setAuthenticatedUser(password);
+      setUserPassword(password);
 
       const cookieOptions = {
         expires: 1, // 1 day

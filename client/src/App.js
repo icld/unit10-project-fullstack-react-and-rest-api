@@ -10,6 +10,7 @@ import UserSignIn from './components/UserSignIn';
 import NotFound from './components/NotFound';
 import Error from './components/Error';
 import Authenticated from './components/Authenticated';
+import CreateCourse from './components/CreateCourse';
 
 function App(props) {
   return (
@@ -18,6 +19,7 @@ function App(props) {
         <Header />
         <Switch>
           <Route exact path='/' component={Courses} />
+          <Route path='/courses/create' component={CreateCourse} />
           <Route path='/courses/:id' component={CourseDetail} />
           <Route path='/signin' component={UserSignIn} />
           <Route path='/signup' component={UserSignUp} />

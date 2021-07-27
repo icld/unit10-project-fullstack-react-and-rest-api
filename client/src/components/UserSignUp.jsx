@@ -69,7 +69,7 @@ const UserSignUp = () => {
   };
   return (
     <main>
-      <div class='form--centered'>
+      <div className='form--centered'>
         <h2>Sign Up</h2>
 
         <form
@@ -78,7 +78,7 @@ const UserSignUp = () => {
             handleSubmit();
           }}
         >
-          <label for='firstName'>First Name</label>
+          <label htmlFor='firstName'>First Name</label>
           <input
             id='firstName'
             name='firstName'
@@ -86,7 +86,7 @@ const UserSignUp = () => {
             value={firstName}
             onChange={change}
           />
-          <label for='lastName'>Last Name</label>
+          <label htmlFor='lastName'>Last Name</label>
           <input
             id='lastName'
             name='lastName'
@@ -94,7 +94,7 @@ const UserSignUp = () => {
             value={lastName}
             onChange={change}
           />
-          <label for='emailAddress'>Email Address</label>
+          <label htmlFor='emailAddress'>Email Address</label>
           <input
             id='emailAddress'
             name='emailAddress'
@@ -102,7 +102,7 @@ const UserSignUp = () => {
             value={emailAddress}
             onChange={change}
           />
-          <label for='password'>Password</label>
+          <label htmlFor='password'>Password</label>
           <input
             id='password'
             name='password'
@@ -110,7 +110,7 @@ const UserSignUp = () => {
             value={password}
             onChange={change}
           />
-          <label for='confirmPassword'>Confirm Password</label>
+          <label htmlFor='confirmPassword'>Confirm Password</label>
           <input
             id='confirmPassword'
             name='confirmPassword'
@@ -118,12 +118,12 @@ const UserSignUp = () => {
             value={confirmPassword}
             onChange={change}
           />
-          <button class='button' type='submit'>
+          <button className='button' type='submit'>
             Sign Up
           </button>
           <button
-            class='button button-secondary'
-            onclick={(e) => {
+            className='button button-secondary'
+            onClick={(e) => {
               history.push('/');
             }}
           >

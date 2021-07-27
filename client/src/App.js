@@ -2,6 +2,8 @@
 import { useState, useEffect, useContext } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+import PrivateRoute from './PrivateRoute';
+
 import Header from './components/Header';
 import Courses from './components/Courses';
 import CourseDetail from './components/CourseDetail';
@@ -20,8 +22,8 @@ function App(props) {
         <Header />
         <Switch>
           <Route exact path='/' component={Courses} />
-          <Route path='/courses/:id/update' component={UpdateCourse} />
-          <Route path='/courses/create' component={CreateCourse} />
+          <PrivateRoute path='/courses/:id/update' component={UpdateCourse} />
+          <PrivateRoute path='/courses/create' component={CreateCourse} />
           <Route path='/courses/:id' component={CourseDetail} />
           <Route path='/signin' component={UserSignIn} />
           <Route path='/signup' component={UserSignUp} />

@@ -14,7 +14,9 @@ const Header = () => {
           <ul className='header--signedin'>
             {authenticatedUser ? (
               <>
-                <li>Welcome, {authenticatedUser[0].firstName}!</li>
+                <li style={{ textTransform: 'capitalize' }}>
+                  Welcome, {authenticatedUser[0].firstName}!
+                </li>
                 <li>
                   <Link onClick={() => actions.signOut()} to='/'>
                     Sign Out

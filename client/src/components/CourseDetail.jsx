@@ -25,6 +25,8 @@ const CourseDetail = (props) => {
 
     console.log(isSignedIn);
     console.log(userId);
+    console.log(user.id);
+
     async function fetchData() {
       await data
         .getCourse(id)
@@ -39,7 +41,7 @@ const CourseDetail = (props) => {
         .catch(() => history.push('/error'));
     }
     fetchData();
-  }, [data, id, history, authenticatedUser, isSignedIn]);
+  }, [data, id, history, authenticatedUser, isSignedIn, userId]);
 
   const deleteCourse = () => {
     data

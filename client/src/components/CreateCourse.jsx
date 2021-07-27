@@ -11,18 +11,14 @@ const CreateCourse = () => {
   const [description, setDescription] = useState('');
   const [time, setTime] = useState();
   const [materials, setMaterials] = useState('');
+  const [userId] = useState(authenticatedUser[0].id);
   const [errors, setErrors] = useState([]);
   const [user] = useState(authenticatedUser[0].emailAddress);
   const [pass] = useState(userPassword);
 
-  const course = { title, description, time, materials };
-  console.log(course);
-  console.log(user);
-
   const submit = async () => {
-    if (title && description && authenticatedUser) {
-      await data.createCourse(course, user, pass).then(history.push('/'));
-    }
+    const course = { title, description, time, materials, userId };
+    await data.createCourse(course, user, pass).then(history.push('/'));
   };
 
   const change = (event) => {

@@ -10,7 +10,7 @@ const Courses = () => {
 
   useEffect(() => {
     data.getCourses().then((res) => setCourses(res));
-  }, [data]);
+  }, []);
   return (
     <main>
       <div className='wrap main--grid'>

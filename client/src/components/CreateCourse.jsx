@@ -16,9 +16,21 @@ const CreateCourse = () => {
   const [user] = useState(authenticatedUser[0].emailAddress);
   const [pass] = useState(userPassword);
 
-  const submit = async () => {
+  const submit = () => {
     const course = { title, description, time, materials, userId };
-    await data.createCourse(course, user, pass).then(history.push('/'));
+    data
+      .createCourse(course, user, pass)
+      .then((errors) => {
+        if (errors) {
+          setErrors(errors);
+        } else {
+          data.getCourses();
+          history.push('/');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const change = (event) => {

@@ -6,7 +6,8 @@ import ReactMarkdown from 'react-markdown';
 import axios from 'axios';
 
 const CourseDetail = (props) => {
-  const { data, authenticatedUser, actions } = useContext(Context);
+  const { data, authenticatedUser, actions, userPassword } =
+    useContext(Context);
   const { id } = useParams();
 
   const [course, setCourse] = useState({});
@@ -33,14 +34,10 @@ const CourseDetail = (props) => {
 
   const deleteCourse = () => {
     data
-      .deleteCourse(id)
+      .deleteCourse(id, authenticatedUser[0].emailAddress, userPassword)
       .then((res) => {
-        if (res) {
-          history.push('/');
-          console.log('course has been deleted');
-        } else {
-          history.push('/notfound');
-        }
+        history.push('/');
+        console.log('course has been deleted');
       })
       .catch(() => history.push('/error'));
   };

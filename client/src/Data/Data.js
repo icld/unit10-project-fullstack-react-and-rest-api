@@ -74,7 +74,9 @@ export default class Data {
     if (res.status === 200) {
       return res.json().then((data) => data);
     } else if (res.status === 400) {
-      return null;
+      return res.json().then((data) => {
+        return null;
+      });
     } else {
       throw new Error();
     }
@@ -86,21 +88,26 @@ export default class Data {
       password,
     });
     if (response.status === 201) {
-      return [];
+      return null;
     } else if (response.status === 400) {
-      return response.json((res) => res);
+      return response.json((res) => {
+        return res.errors;
+      });
+    } else {
+      throw new Error();
     }
   }
   // updateCourse() {}
 
   async deleteCourse(id, username, password) {
-    const res = await this.api(`/courses/${id}`, 'Delete', null, true, {
+    const res = await this.api(`/courses/${id}`, 'DELETE', null, true, {
       username,
       password,
     });
 
     if (res.status === 204) {
-      return res.json().then((data) => data);
+      // return res.json().then((data) => data);
+      return null;
     } else if (res.status === 403) {
       return null;
     } else {

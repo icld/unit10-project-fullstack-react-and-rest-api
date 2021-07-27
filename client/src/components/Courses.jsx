@@ -11,6 +11,11 @@ const Courses = () => {
   useEffect(() => {
     data.getCourses().then((res) => setCourses(res));
   }, [data]);
+
+  // const fetchCourses = () => {
+  //   data.getCourses().then((res) => setCourses(res));
+  // };
+
   return (
     <main>
       <div className='wrap main--grid'>

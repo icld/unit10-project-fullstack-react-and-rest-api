@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Context } from '../Context/Context';
+import Modal from '../components/Modal';
 
 const UserSignIn = (props) => {
   const history = useHistory();
@@ -11,6 +12,8 @@ const UserSignIn = (props) => {
   const [emailAddress, setEmailAddress] = useState();
   const [password, setPassword] = useState();
   const [errors, setErrors] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+
   const { actions, authenticatedUser } = useContext(Context);
 
   if (authenticatedUser) {
@@ -24,7 +27,8 @@ const UserSignIn = (props) => {
         if (user === null) {
           setErrors('Sign-in was unsuccsessful');
         } else {
-          history.push(from);
+          toggleModal();
+          // history.push(from);
           // return null;
         }
       })
@@ -33,6 +37,8 @@ const UserSignIn = (props) => {
         // history.push('/error');
       });
   };
+
+  const toggleModal = () => setShowModal(!showModal);
 
   function ErrorsDisplay(errors) {
     let errorsDisplay = null;
@@ -108,6 +114,19 @@ const UserSignIn = (props) => {
           <Link to='/signup'>sign up</Link>!
         </p>
       </div>
+      {showModal ? (
+        <Modal>
+          <div className='bounds'>
+            <div className='grid-100'>
+              <h1>Your account has been created!</h1>
+              <p>Your username is {authenticatedUser[0].emailAddress}.</p>
+            </div>
+            <button onClick={() => history.push('/')}>
+              Check out some courses
+            </button>
+          </div>
+        </Modal>
+      ) : null}
     </main>
   );
 };

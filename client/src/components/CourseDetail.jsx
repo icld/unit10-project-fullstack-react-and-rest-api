@@ -36,6 +36,7 @@ const CourseDetail = (props) => {
     data
       .deleteCourse(id, authenticatedUser[0].emailAddress, userPassword)
       .then((res) => {
+        data.getCourses();
         history.push('/');
         console.log('course has been deleted');
       })

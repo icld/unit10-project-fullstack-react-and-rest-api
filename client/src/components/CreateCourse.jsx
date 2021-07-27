@@ -44,7 +44,7 @@ const CreateCourse = () => {
           data
             .getCourses()
             .then((courses) => {
-              newId = courses[courses.length - 1].id;
+              newId = courses.slice(-1)[0].id;
               console.log(newId);
             })
             .then(() => history.push(`/courses/${newId}`));

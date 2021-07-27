@@ -1,3 +1,4 @@
+import { set } from 'js-cookie';
 import { useState, useContext } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { Context } from '../Context/Context';
@@ -15,6 +16,11 @@ const CreateCourse = () => {
   const [errors, setErrors] = useState([]);
   const [user] = useState(authenticatedUser[0].emailAddress);
   const [pass] = useState(userPassword);
+  const [validationErrors, setValidationErrors] = useState([]);
+  const [newCourseId, setNewCourseId] = useState();
+
+  let createdCourse;
+  console.log(createdCourse);
 
   const submit = () => {
     const course = {
@@ -24,14 +30,24 @@ const CreateCourse = () => {
       materialsNeeded,
       userId,
     };
+
+    let newId;
+
     data
       .createCourse(course, user, pass)
-      .then((errors) => {
-        if (errors) {
-          setErrors(errors);
+      .then((response) => {
+        if (response) {
+          setValidationErrors(response.errors);
+
+          console.log(response);
         } else {
-          data.getCourses();
-          history.push('/');
+          data
+            .getCourses()
+            .then((courses) => {
+              newId = courses[courses.length - 1].id;
+              console.log(newId);
+            })
+            .then(() => history.push(`/courses/${newId}`));
         }
       })
       .catch((err) => {
@@ -63,13 +79,17 @@ const CreateCourse = () => {
     <main>
       <div className='wrap'>
         <h2>Create Course</h2>
-        <div className='validation--errors'>
-          <h3>Validation Errors</h3>
-          <ul>
-            <li>Please provide a value for "Title"</li>
-            <li>Please provide a value for "Description"</li>
-          </ul>
-        </div>
+        {validationErrors.length ? (
+          <div className='validation--errors'>
+            <h3>Validation Errors</h3>
+            <ul>
+              {validationErrors.map((error) => (
+                <li>{error}</li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+
         <form
           onSubmit={(e) => {
             e.preventDefault();

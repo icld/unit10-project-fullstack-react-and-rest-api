@@ -9,15 +9,21 @@ const CreateCourse = () => {
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [time, setTime] = useState();
-  const [materials, setMaterials] = useState('');
+  const [estimatedTime, setTime] = useState();
+  const [materialsNeeded, setMaterials] = useState('');
   const [userId] = useState(authenticatedUser[0].id);
   const [errors, setErrors] = useState([]);
   const [user] = useState(authenticatedUser[0].emailAddress);
   const [pass] = useState(userPassword);
 
   const submit = () => {
-    const course = { title, description, time, materials, userId };
+    const course = {
+      title,
+      description,
+      estimatedTime,
+      materialsNeeded,
+      userId,
+    };
     data
       .createCourse(course, user, pass)
       .then((errors) => {
@@ -99,7 +105,7 @@ const CreateCourse = () => {
                 id='estimatedTime'
                 name='estimatedTime'
                 type='text'
-                value={time}
+                value={estimatedTime}
                 onChange={change}
               />
 
@@ -107,7 +113,7 @@ const CreateCourse = () => {
               <textarea
                 id='materialsNeeded'
                 name='materialsNeeded'
-                value={materials}
+                value={materialsNeeded}
                 onChange={change}
               ></textarea>
             </div>

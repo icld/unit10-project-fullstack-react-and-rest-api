@@ -48,7 +48,7 @@ const CourseDetail = (props) => {
     <main>
       <div className='actions--bar'>
         <div className='wrap'>
-          <Link className='button' to='update-course.html'>
+          <Link className='button' to={`/courses/${id}/update`}>
             Update Course
           </Link>
           <Link className='button' onClick={() => deleteCourse()} to='/'>
@@ -68,7 +68,7 @@ const CourseDetail = (props) => {
             <div>
               <h3 className='course--detail--title'>Course</h3>
               <h4 className='course--name'>{course.title}</h4>
-              <p>
+              <p style={{ textTransform: 'capitalize' }}>
                 {user.firstName} {user.lastName}
               </p>
 

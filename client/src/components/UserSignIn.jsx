@@ -13,6 +13,7 @@ const UserSignIn = (props) => {
   const [password, setPassword] = useState();
   const [errors, setErrors] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [showValidationError, setShowValidationError] = useState(false);
 
   const { actions, authenticatedUser } = useContext(Context);
 

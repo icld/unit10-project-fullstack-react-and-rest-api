@@ -12,10 +12,19 @@ const CourseDetail = (props) => {
 
   const [course, setCourse] = useState({});
   const [user, setUser] = useState({});
+  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [userId, setUserId] = useState();
 
   const history = useHistory();
 
   useEffect(() => {
+    if (authenticatedUser) {
+      setIsSignedIn(true);
+      setUserId(authenticatedUser[0].id);
+    }
+
+    console.log(isSignedIn);
+    console.log(userId);
     async function fetchData() {
       await data
         .getCourse(id)
@@ -30,7 +39,7 @@ const CourseDetail = (props) => {
         .catch(() => history.push('/error'));
     }
     fetchData();
-  }, [data, id, history]);
+  }, [data, id, history, authenticatedUser, isSignedIn]);
 
   const deleteCourse = () => {
     data
@@ -48,12 +57,16 @@ const CourseDetail = (props) => {
     <main>
       <div className='actions--bar'>
         <div className='wrap'>
-          <Link className='button' to={`/courses/${id}/update`}>
-            Update Course
-          </Link>
-          <Link className='button' onClick={() => deleteCourse()} to='/'>
-            Delete Course
-          </Link>
+          {isSignedIn && userId === user.id ? (
+            <>
+              <Link className='button' to={`/courses/${id}/update`}>
+                Update Course
+              </Link>
+              <Link className='button' onClick={() => deleteCourse()} to='/'>
+                Delete Course
+              </Link>
+            </>
+          ) : null}
           <Link className='button button-secondary' to='/'>
             Return to List
           </Link>

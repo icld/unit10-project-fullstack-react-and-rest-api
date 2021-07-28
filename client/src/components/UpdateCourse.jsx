@@ -27,7 +27,9 @@ const UpdateCourse = () => {
       await data
         .getCourse(id)
         .then((res) => {
-          if (res) {
+          if (res.userId !== authUser.id) {
+            history.push('/forbidden');
+          } else if (res) {
             setCourse(res);
             setAuthUser(res.userInfo);
             setTitle(res.title);
@@ -41,7 +43,7 @@ const UpdateCourse = () => {
         .catch(() => history.push('/error'));
     }
     fetchData();
-  }, [data, id, history]);
+  }, [data, id, history, authUser.id]);
 
   const submit = () => {
     const course = {
@@ -64,6 +66,7 @@ const UpdateCourse = () => {
       })
       .catch((err) => {
         console.log(err);
+        history.push('/error');
       });
   };
 

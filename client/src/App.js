@@ -10,7 +10,7 @@ import CourseDetail from './components/CourseDetail';
 import UserSignUp from './components/UserSignUp';
 import UserSignIn from './components/UserSignIn';
 import NotFound from './components/NotFound';
-import Error from './components/Error';
+import UnhandledError from './components/UnhandledError';
 import Authenticated from './components/Authenticated';
 import CreateCourse from './components/CreateCourse';
 import UpdateCourse from './components/UpdateCourse';
@@ -28,9 +28,9 @@ function App(props) {
           <Route path='/courses/:id' component={CourseDetail} />
           <Route path='/signin' component={UserSignIn} />
           <Route path='/signup' component={UserSignUp} />
-          <Route path='/error' component={Error} />
+          <Route path='/error' component={UnhandledError} />
           <Route path='/forbidden' component={Forbidden} />
-          <Route path='/authenticated' component={Authenticated} />
+
           <Route component={NotFound} />
         </Switch>
       </div>

@@ -14,6 +14,7 @@ import Error from './components/Error';
 import Authenticated from './components/Authenticated';
 import CreateCourse from './components/CreateCourse';
 import UpdateCourse from './components/UpdateCourse';
+import Forbidden from './components/Forbidden';
 
 function App(props) {
   return (
@@ -28,6 +29,7 @@ function App(props) {
           <Route path='/signin' component={UserSignIn} />
           <Route path='/signup' component={UserSignUp} />
           <Route path='/error' component={Error} />
+          <Route path='/forbidden' component={Forbidden} />
           <Route path='/authenticated' component={Authenticated} />
           <Route component={NotFound} />
         </Switch>

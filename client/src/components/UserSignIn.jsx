@@ -24,8 +24,8 @@ const UserSignIn = (props) => {
   const handleSubmit = () => {
     actions
       .signIn(emailAddress, password)
-      .then((user) => {
-        if (user === null) {
+      .then((res) => {
+        if (!res) {
           setErrors('Sign-in was unsuccsessful');
         } else {
           toggleModal();
@@ -67,10 +67,17 @@ const UserSignIn = (props) => {
 
   return (
     <main>
-      {errors.length > 0 ? <ErrorsDisplay errors={errors} /> : null}
       <div className='form--centered'>
         <h2>Sign In</h2>
 
+        {errors.length ? (
+          <div>
+            <h2 className='validation--errors--label'>Validation errors</h2>
+            <div className='validation-errors'>
+              <ul>{errors}</ul>
+            </div>
+          </div>
+        ) : null}
         <form
           onSubmit={(event) => {
             event.preventDefault();
@@ -115,7 +122,7 @@ const UserSignIn = (props) => {
           <Link to='/signup'>sign up</Link>!
         </p>
       </div>
-      {showModal ? (
+      {showModal && authenticatedUser ? (
         <Modal>
           <div className='bounds'>
             <div className='grid-100'>

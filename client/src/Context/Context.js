@@ -17,7 +17,6 @@ export const Provider = (props) => {
 
   const signIn = async (emailAddress, password) => {
     const user = await data.getUser(emailAddress, password);
-    console.log(`here is a ${user}`);
     if (user !== null) {
       setAuthenticatedUser(user);
       setUserPassword(password);

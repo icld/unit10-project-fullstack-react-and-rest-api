@@ -103,8 +103,12 @@ export default class Data {
       username,
       password,
     });
-    if (response.status !== 204) {
+    if (response.status === 204) {
       return response.status;
+    } else if (response.status === 400) {
+      return response.json((res) => {
+        return res.errors;
+      });
     } else {
       return null;
     }

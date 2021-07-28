@@ -9,7 +9,9 @@ const Courses = () => {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    data.getCourses().then((res) => setCourses(res));
+    data.getCourses().then((res) => {
+      setCourses(res);
+    });
   }, [data]);
 
   // const fetchCourses = () => {
@@ -26,7 +28,18 @@ const Courses = () => {
             key={course.id}
           >
             <h2 className='course--label'>Course</h2>
-            <h3 className='course--title'>{course.title}</h3>
+            <h3
+              className='course--title'
+              style={{ textTransform: 'capitalize' }}
+            >
+              {course.title}
+            </h3>
+            <h2
+              className='course--author'
+              style={{ textTransform: 'capitalize' }}
+            >
+              By {course.userInfo.firstName} {course.userInfo.lastName}{' '}
+            </h2>
           </Link>
         ))}
 

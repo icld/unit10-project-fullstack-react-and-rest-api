@@ -68,16 +68,30 @@ header nav a:hover {
   margin-bottom: 1.5rem;
   display: block;
 }
+
+.course--module:hover {
+  background: #ae91d8;
+}
+
+.course--add--module:hover {
+  background: #b6e3bb;
+}
 .course--label {
   color: #fff;
   font-size: 0.9rem;
   font-weight: 400;
   margin-bottom: 0.25rem;
 }
+
+.course--author {
+  margin-bottom: 0;
+  padding-top: 4px;
+}
 .course--title {
   color: #fff;
   font-weight: 700;
   font-size: 1.25rem;
+  margin-bottom: 0.25rem;
 }
 .course--add--module {
   background: #ddd9e4;

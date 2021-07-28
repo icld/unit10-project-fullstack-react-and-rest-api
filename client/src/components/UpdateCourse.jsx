@@ -13,7 +13,7 @@ const UpdateCourse = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [userId] = useState(authenticatedUser[0].id);
-  const [errors, setErrors] = useState([]);
+  const [validationErrors, setErrors] = useState([]);
 
   const [estimatedTime, setTime] = useState();
   const [materialsNeeded, setMaterials] = useState('');
@@ -53,9 +53,10 @@ const UpdateCourse = () => {
     };
     data
       .updateCourse(id, course, user, pass)
-      .then((errors) => {
-        if (errors) {
-          setErrors(errors);
+      .then((response) => {
+        if (response.errors) {
+          setErrors(response.errors);
+          console.log(response.errors);
         } else {
           // data.getCourse(id);
           history.push(`/courses/${id}`);
@@ -90,6 +91,16 @@ const UpdateCourse = () => {
     <main>
       <div class='wrap'>
         <h2>Update Course</h2>
+        {validationErrors.length ? (
+          <div className='validation--errors'>
+            <h3>Validation Errors</h3>
+            <ul>
+              {validationErrors.map((error) => (
+                <li>{error}</li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
         <form
           onSubmit={(e) => {
             e.preventDefault();

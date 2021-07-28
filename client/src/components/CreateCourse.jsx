@@ -2,6 +2,7 @@ import { set } from 'js-cookie';
 import { useState, useContext } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { Context } from '../Context/Context';
+import Modal from './Modal';
 
 const CreateCourse = () => {
   const { data, actions, authenticatedUser, userPassword } =
@@ -19,8 +20,13 @@ const CreateCourse = () => {
   const [validationErrors, setValidationErrors] = useState([]);
   const [newCourseId, setNewCourseId] = useState();
 
+  const [showModal, setShowModal] = useState(false);
+  const toggleModal = () => setShowModal(!showModal);
+
   let createdCourse;
   console.log(createdCourse);
+
+  let newId;
 
   const submit = () => {
     const course = {
@@ -41,13 +47,13 @@ const CreateCourse = () => {
 
           console.log(response);
         } else {
-          data
-            .getCourses()
-            .then((courses) => {
-              newId = courses.slice(-1)[0].id;
-              console.log(newId);
-            })
-            .then(() => history.push(`/courses/${newId}`));
+          data.getCourses().then((courses) => {
+            newId = courses.slice(-1)[0].id;
+            console.log(newId);
+            setNewCourseId(newId);
+            toggleModal();
+          });
+          // .then(() => history.push(`/courses/${newId}`));
         }
       })
       .catch((err) => {
@@ -149,6 +155,14 @@ const CreateCourse = () => {
           </button>
         </form>
       </div>
+      {showModal ? (
+        <Modal>
+          <h1>Congratulations on creating your New Course!</h1>
+          <button onClick={() => history.push(`/courses/${newCourseId}`)}>
+            Check it out
+          </button>
+        </Modal>
+      ) : null}
     </main>
   );
 };

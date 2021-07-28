@@ -110,7 +110,7 @@ export default class Data {
         return res.errors;
       });
     } else {
-      return null;
+      throw new Error();
     }
   }
 

@@ -23,11 +23,11 @@ const UserSignIn = (props) => {
 
   const handleSubmit = () => {
     if (!password && !emailAddress) {
-      setErrors((errors) => ['Please Sign in!']);
+      setErrors('Please Sign in!');
     } else if (!password) {
-      setErrors((errors) => ['Please enter a password']);
+      setErrors('Please enter a password');
     } else if (!emailAddress) {
-      setErrors((errors) => ['Please enter your email address']);
+      setErrors('Please enter your email address');
     } else {
       actions
         .signIn(emailAddress, password)
@@ -61,9 +61,7 @@ const UserSignIn = (props) => {
           <div className='validation--errors'>
             <h3>Validation Errors</h3>
             <ul>
-              {errors.map((error) => (
-                <li>{error}</li>
-              ))}
+              <li>{errors}</li>
             </ul>
           </div>
         ) : null}

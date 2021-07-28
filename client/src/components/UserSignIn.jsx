@@ -22,39 +22,32 @@ const UserSignIn = (props) => {
   }
 
   const handleSubmit = () => {
-    // if (!password && !emailAddress) {
-    //   setErrors('Please Sign in!');
-    // } else if (!password) {
-    //   setErrors('Please enter a password');
-    // } else if (!emailAddress) {
-    //   setErrors('Please enter your email address');
-    // } else {}
-    actions
-      .signIn(emailAddress, password)
-      .then((user) => {
-        if (user.message) {
-          console.log(user.message);
-          setErrors(user.message);
-        } else {
-          history.goBack();
-        }
-
-        // if (res.errors) {
-        //   setErrors(res);
-        //   console.log(res);
-        // } else {
-        //   // toggleModal();
-        //   history.goBack();
-        //   // return null;
-        // }
-      })
-      .catch((err) => {
-        console.error(err);
-        history.push('/error');
-      });
+    if (!password && !emailAddress) {
+      setErrors((errors) => ['Please Sign in!']);
+    } else if (!password) {
+      setErrors((errors) => ['Please enter a password']);
+    } else if (!emailAddress) {
+      setErrors((errors) => ['Please enter your email address']);
+    } else {
+      actions
+        .signIn(emailAddress, password)
+        .then((res) => {
+          if (!res) {
+            setErrors('Sign-in was unsuccessful');
+          } else {
+            // toggleModal();
+            history.goBack();
+            // return null;
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+          history.push('/error');
+        });
+    }
   };
 
-  // const toggleModal = () => setShowModal(!showModal);
+  const toggleModal = () => setShowModal(!showModal);
 
   useEffect(() => {
     console.log(`password is ${password}, emailAddress is ${emailAddress}`);
@@ -108,7 +101,7 @@ const UserSignIn = (props) => {
             className='button button-secondary'
             onClick={(event) => {
               event.preventDefault();
-              // history.push('/');
+              history.push('/');
             }}
           >
             Cancel

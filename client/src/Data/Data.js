@@ -37,8 +37,9 @@ export default class Data {
     });
     if (response.status === 200) {
       return response.json().then((data) => data);
+      // return null;
     } else if (response.status === 401) {
-      return null;
+      return response.json().then((res) => res);
     } else {
       throw new Error();
     }

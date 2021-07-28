@@ -22,32 +22,39 @@ const UserSignIn = (props) => {
   }
 
   const handleSubmit = () => {
-    if (!password && !emailAddress) {
-      setErrors('Please Sign in!');
-    } else if (!password) {
-      setErrors('Please enter a password');
-    } else if (!emailAddress) {
-      setErrors('Please enter your email address');
-    } else {
-      actions
-        .signIn(emailAddress, password)
-        .then((res) => {
-          if (!res) {
-            setErrors('Sign-in was unsuccessful');
-          } else {
-            toggleModal();
-            // history.push(from);
-            // return null;
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-          history.push('/error');
-        });
-    }
+    // if (!password && !emailAddress) {
+    //   setErrors('Please Sign in!');
+    // } else if (!password) {
+    //   setErrors('Please enter a password');
+    // } else if (!emailAddress) {
+    //   setErrors('Please enter your email address');
+    // } else {}
+    actions
+      .signIn(emailAddress, password)
+      .then((user) => {
+        if (user.message) {
+          console.log(user.message);
+          setErrors(user.message);
+        } else {
+          history.goBack();
+        }
+
+        // if (res.errors) {
+        //   setErrors(res);
+        //   console.log(res);
+        // } else {
+        //   // toggleModal();
+        //   history.goBack();
+        //   // return null;
+        // }
+      })
+      .catch((err) => {
+        console.error(err);
+        history.push('/error');
+      });
   };
 
-  const toggleModal = () => setShowModal(!showModal);
+  // const toggleModal = () => setShowModal(!showModal);
 
   useEffect(() => {
     console.log(`password is ${password}, emailAddress is ${emailAddress}`);
@@ -57,16 +64,17 @@ const UserSignIn = (props) => {
     <main>
       <div className='form--centered'>
         <h2>Sign In</h2>
-
         {errors.length ? (
           <div className='validation--errors'>
             <h3>Validation Errors</h3>
-
             <ul>
-              <li>{errors}</li>
+              {errors.map((error) => (
+                <li>{error}</li>
+              ))}
             </ul>
           </div>
         ) : null}
+
         <form
           onSubmit={(event) => {
             event.preventDefault();
@@ -100,7 +108,7 @@ const UserSignIn = (props) => {
             className='button button-secondary'
             onClick={(event) => {
               event.preventDefault();
-              history.push('/');
+              // history.push('/');
             }}
           >
             Cancel
@@ -111,7 +119,7 @@ const UserSignIn = (props) => {
           <Link to='/signup'>sign up</Link>!
         </p>
       </div>
-      {showModal && authenticatedUser ? (
+      {/* {showModal && authenticatedUser ? (
         <Modal>
           <div className='bounds'>
             <div className='grid-100'>
@@ -123,7 +131,7 @@ const UserSignIn = (props) => {
             </button>
           </div>
         </Modal>
-      ) : null}
+      ) : null} */}
     </main>
   );
 };

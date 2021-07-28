@@ -9,8 +9,8 @@ const UserSignUp = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [emailAddress, setEmailAddress] = useState('');
-  const [password, setPass] = useState('');
-  const [confirmPassword, setConfirmPass] = useState('');
+  const [password, setPass] = useState();
+  const [confirmPassword, setConfirmPass] = useState();
   const [errors, setErrors] = useState([]);
 
   console.log(firstName, lastName, emailAddress, password, confirmPassword);
@@ -28,10 +28,11 @@ const UserSignUp = () => {
         .createUser(user)
         .then((errors) => {
           if (errors.length) {
+            console.log(errors);
             setErrors(errors);
           } else {
             actions.signIn(emailAddress, password).then(() => {
-              history.push('/authenticated');
+              history.goBack();
             });
           }
         })
@@ -71,7 +72,16 @@ const UserSignUp = () => {
     <main>
       <div className='form--centered'>
         <h2>Sign Up</h2>
-
+        {errors.length ? (
+          <div className='validation--errors'>
+            <h3>Validation Errors</h3>
+            <ul>
+              {errors.map((error) => (
+                <li>{error}</li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
         <form
           onSubmit={(e) => {
             e.preventDefault();

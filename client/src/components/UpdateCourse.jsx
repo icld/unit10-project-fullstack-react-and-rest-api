@@ -96,7 +96,7 @@ const UpdateCourse = () => {
 
   return (
     <main>
-      <div class='wrap'>
+      <div className='wrap'>
         <h2>Update Course</h2>
         {validationErrors.length ? (
           <div className='validation--errors'>
@@ -114,7 +114,7 @@ const UpdateCourse = () => {
             submit();
           }}
         >
-          <div class='main--flex'>
+          <div className='main--flex'>
             <div>
               <label htmlFor='courseTitle'>Course Title</label>
               <input
@@ -156,12 +156,12 @@ const UpdateCourse = () => {
               ></textarea>
             </div>
           </div>
-          <button class='button' type='submit'>
+          <button className='button' type='submit'>
             Update Course
           </button>
           <button
-            class='button button-secondary'
-            onclick="event.preventDefault(); location.href='index.html';"
+            className='button button-secondary'
+            onClick={() => history.goBack()}
           >
             Cancel
           </button>

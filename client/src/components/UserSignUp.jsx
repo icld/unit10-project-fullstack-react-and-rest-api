@@ -30,8 +30,11 @@ const UserSignUp = () => {
         .then((errors) => {
           if (errors.length) {
             // test errors
-            // console.log(errors);
+            console.log(errors);
             setErrors(errors);
+            if (password === '') {
+              setErrors((errors) => [...errors, 'Please enter a password']);
+            }
           } else {
             actions.signIn(emailAddress, password).then(() => {
               history.goBack();
@@ -40,7 +43,7 @@ const UserSignUp = () => {
         })
         .catch((err) => {
           console.log(err);
-          history.push('/error');
+          //history.push('/error')
         });
     } else {
       setErrors(['passwords must match']);

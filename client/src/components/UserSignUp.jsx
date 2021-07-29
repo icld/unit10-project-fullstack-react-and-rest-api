@@ -30,7 +30,7 @@ const UserSignUp = () => {
       .then((errors) => {
         if (errors.length) {
           // test errors
-          console.log(errors);
+          // console.log(errors);
           setErrors(errors);
         } else {
           actions.signIn(emailAddress, password).then(() => {

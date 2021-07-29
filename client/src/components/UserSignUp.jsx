@@ -22,30 +22,26 @@ const UserSignUp = () => {
       lastName,
       emailAddress,
       password,
+      confirmPassword,
     };
 
-    if (password === confirmPassword) {
-      data
-        .createUser(user)
-        .then((errors) => {
-          if (errors.length) {
-            // test errors
-            console.log(errors);
-            setErrors(errors);
-          } else {
-            actions.signIn(emailAddress, password).then(() => {
-              history.goBack();
-            });
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          //history.push('/error')
-        });
-    } else {
-      setErrors(['passwords must match']);
-      console.log(errors);
-    }
+    data
+      .createUser(user)
+      .then((errors) => {
+        if (errors.length) {
+          // test errors
+          console.log(errors);
+          setErrors(errors);
+        } else {
+          actions.signIn(emailAddress, password).then(() => {
+            history.goBack();
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        history.push('/error');
+      });
   };
 
   const change = (event) => {

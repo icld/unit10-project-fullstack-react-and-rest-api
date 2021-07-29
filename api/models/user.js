@@ -51,6 +51,7 @@ module.exports = (sequelize) => {
       password: {
         type: DataTypes.STRING,
         allowNull: false,
+
         validate: {
           notNull: {
             msg: 'A password is required',
@@ -59,13 +60,44 @@ module.exports = (sequelize) => {
             msg: 'Please provide a password',
           },
         },
-        set(val) {
-          const hashedPassword = bcrypt.hashSync(val, 10);
-          this.setDataValue('password', hashedPassword);
+      },
+
+      confirmPassword: {
+        type: DataTypes.VIRTUAL,
+        allowNull: false,
+
+        validate: {
+          customValidator(val) {
+            if (val !== this.password) {
+              console.log(this.password);
+              throw new Error(`The passwords do not match`);
+            } else {
+              return null;
+            }
+          },
+          notNull: {
+            msg: 'Please Confirm Password',
+          },
+          notEmpty: {
+            msg: 'Please Confirm Password',
+          },
+          // equals: () => User.password,
         },
       },
     },
-    { sequelize }
+    {
+      sequelize,
+      modelName: 'User',
+      hooks: {
+        afterValidate: function(user) {
+          if (user.password === user.confirmPassword) {
+            console.log('theres matching');
+            const salt = bcrypt.genSaltSync(10, 'a');
+            user.password = bcrypt.hashSync(user.password, salt);
+          }
+        },
+      },
+    }
   );
 
   User.associate = (models) => {

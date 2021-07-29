@@ -32,9 +32,6 @@ const UserSignUp = () => {
             // test errors
             console.log(errors);
             setErrors(errors);
-            if (password === '') {
-              setErrors((errors) => [...errors, 'Please enter a password']);
-            }
           } else {
             actions.signIn(emailAddress, password).then(() => {
               history.goBack();

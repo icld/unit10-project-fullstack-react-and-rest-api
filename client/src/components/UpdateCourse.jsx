@@ -14,7 +14,7 @@ const UpdateCourse = () => {
   const [userId] = useState(authenticatedUser[0].id);
   const [validationErrors, setErrors] = useState([]);
 
-  const [estimatedTime, setTime] = useState();
+  const [estimatedTime, setTime] = useState('');
   const [materialsNeeded, setMaterials] = useState('');
   const [user] = useState(authenticatedUser[0].emailAddress);
   const [pass] = useState(userPassword);
@@ -47,7 +47,7 @@ const UpdateCourse = () => {
         .catch(() => history.push('/error'));
     }
     fetchData();
-  }, [data, id, history, authUser.id]);
+  }, [data, id, history, authUser.id, userId]);
 
   const submit = () => {
     const course = {

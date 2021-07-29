@@ -18,7 +18,7 @@ const Header = () => {
                   Welcome, {authenticatedUser[0].firstName}!
                 </li>
                 <li>
-                  <Link onClick={() => actions.signOut()} to='/'>
+                  <Link onClick={() => actions.signOut()} to=''>
                     Sign Out
                   </Link>
                 </li>

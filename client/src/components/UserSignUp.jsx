@@ -4,16 +4,17 @@ import { Context } from '../Context/Context';
 
 const UserSignUp = () => {
   const { data, actions } = useContext(Context);
-  let history = useHistory();
+  const history = useHistory();
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [emailAddress, setEmailAddress] = useState('');
-  const [password, setPass] = useState();
-  const [confirmPassword, setConfirmPass] = useState();
+  const [password, setPass] = useState('');
+  const [confirmPassword, setConfirmPass] = useState('');
   const [errors, setErrors] = useState([]);
 
-  console.log(firstName, lastName, emailAddress, password, confirmPassword);
+  //text log
+  // console.log(firstName, lastName, emailAddress, password, confirmPassword);
 
   const handleSubmit = () => {
     const user = {
@@ -28,7 +29,8 @@ const UserSignUp = () => {
         .createUser(user)
         .then((errors) => {
           if (errors.length) {
-            console.log(errors);
+            // test errors
+            // console.log(errors);
             setErrors(errors);
           } else {
             actions.signIn(emailAddress, password).then(() => {
@@ -38,7 +40,7 @@ const UserSignUp = () => {
         })
         .catch((err) => {
           console.log(err);
-          //history.push('/error')
+          history.push('/error');
         });
     } else {
       setErrors(['passwords must match']);
@@ -76,8 +78,8 @@ const UserSignUp = () => {
           <div className='validation--errors'>
             <h3>Validation Errors</h3>
             <ul>
-              {errors.map((error) => (
-                <li>{error}</li>
+              {errors.map((error, i) => (
+                <li key={i}>{error}</li>
               ))}
             </ul>
           </div>

@@ -3,11 +3,11 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { Link, NavLink, useParams, useHistory } from 'react-router-dom';
 import { Context } from '../Context/Context';
 import ReactMarkdown from 'react-markdown';
-import axios from 'axios';
 
 const CourseDetail = (props) => {
   const { data, authenticatedUser, actions, userPassword } =
     useContext(Context);
+
   const { id } = useParams();
 
   const [course, setCourse] = useState({});
@@ -23,9 +23,10 @@ const CourseDetail = (props) => {
       setUserId(authenticatedUser[0].id);
     }
 
-    console.log(isSignedIn);
-    console.log(userId);
-    console.log(user.id);
+    // for testing
+    // console.log(isSignedIn);
+    // console.log(userId);
+    // console.log(user.id);
 
     async function fetchData() {
       await data
@@ -41,7 +42,7 @@ const CourseDetail = (props) => {
         .catch(() => history.push('/error'));
     }
     fetchData();
-  }, [data, id, history, authenticatedUser, isSignedIn, userId]);
+  }, [data, id, history, authenticatedUser, isSignedIn, userId, user.id]);
 
   const deleteCourse = () => {
     data
@@ -54,7 +55,6 @@ const CourseDetail = (props) => {
       .catch(() => history.push('/error'));
   };
 
-  console.log(course);
   return (
     <main>
       <div className='actions--bar'>

@@ -17,7 +17,8 @@ export const Provider = (props) => {
 
   const signIn = async (emailAddress, password) => {
     const user = await data.getUser(emailAddress, password);
-    console.log(user);
+    //test log user
+    // console.log(user);
     if (user !== null) {
       setAuthenticatedUser(user);
       setUserPassword(password);
@@ -25,7 +26,6 @@ export const Provider = (props) => {
       Cookies.set('authenticatedUser', JSON.stringify(user), { expires: 1 });
       Cookies.set('userPassword', JSON.stringify(password), { expires: 1 });
     }
-    console.log(user);
     return user;
   };
 

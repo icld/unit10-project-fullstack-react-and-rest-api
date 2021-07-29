@@ -3,23 +3,20 @@ import { Link, useHistory } from 'react-router-dom';
 import { Context } from '../Context/Context';
 import Modal from '../components/Modal';
 
-const UserSignIn = (props) => {
+const UserSignIn = () => {
   const history = useHistory();
-  // const { from } = history.location.state || {
-  //   from: { pathname: '/authenticated' },
-  // };
 
-  const [emailAddress, setEmailAddress] = useState();
-  const [password, setPassword] = useState();
+  const [emailAddress, setEmailAddress] = useState('');
+  const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [showValidationError, setShowValidationError] = useState(false);
 
   const { actions, authenticatedUser } = useContext(Context);
 
-  if (authenticatedUser) {
-    console.log(`authneticated user is ${authenticatedUser[0].firstName}`);
-  }
+  //test log
+  // if (authenticatedUser) {
+  //   console.log(`authneticated user is ${authenticatedUser[0].firstName}`);
+  // }
 
   const handleSubmit = () => {
     if (!password && !emailAddress) {
@@ -35,11 +32,12 @@ const UserSignIn = (props) => {
           if (!res) {
             setErrors('Sign-in was unsuccessful');
           } else {
-            // toggleModal();
             history.goBack();
-            // return null;
+            // toggleModal();
+            return null;
           }
         })
+        // .then(() => history.goBack())
         .catch((err) => {
           console.error(err);
           history.push('/error');
@@ -48,10 +46,6 @@ const UserSignIn = (props) => {
   };
 
   const toggleModal = () => setShowModal(!showModal);
-
-  useEffect(() => {
-    console.log(`password is ${password}, emailAddress is ${emailAddress}`);
-  }, [password, emailAddress]);
 
   return (
     <main>
@@ -72,7 +66,7 @@ const UserSignIn = (props) => {
             handleSubmit();
           }}
         >
-          <label for='emailAddress'>Email Address</label>
+          <label htmlFor='emailAddress'>Email Address</label>
           <input
             id='emailAddress'
             name='emailAddress'
@@ -82,7 +76,7 @@ const UserSignIn = (props) => {
               setEmailAddress(e.target.value);
             }}
           />
-          <label for='password'>Password</label>
+          <label htmlFor='password'>Password</label>
           <input
             id='password'
             name='password'

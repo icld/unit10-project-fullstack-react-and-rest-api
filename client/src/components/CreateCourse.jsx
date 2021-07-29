@@ -23,9 +23,6 @@ const CreateCourse = () => {
   const [showModal, setShowModal] = useState(false);
   const toggleModal = () => setShowModal(!showModal);
 
-  let createdCourse;
-  console.log(createdCourse);
-
   let newId;
 
   const submit = () => {

@@ -1,8 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { Link, NavLink, useParams, useHistory } from 'react-router-dom';
 import { Context } from '../Context/Context';
-import ReactMarkdown from 'react-markdown';
-import axios from 'axios';
+
 const UpdateCourse = () => {
   const { data, authenticatedUser, actions, userPassword } =
     useContext(Context);
@@ -22,20 +21,25 @@ const UpdateCourse = () => {
 
   const history = useHistory();
 
+  // console.log(authenticatedUser[0].id);
+
   useEffect(() => {
     async function fetchData() {
       await data
         .getCourse(id)
         .then((res) => {
-          if (res.userId !== authUser.id) {
-            history.push('/forbidden');
-          } else if (res) {
-            setCourse(res);
-            setAuthUser(res.userInfo);
-            setTitle(res.title);
-            setDescription(res.description);
-            setTime(res.estimatedTime);
-            setMaterials(res.materialsNeeded);
+          if (res) {
+            if (res.userId === userId) {
+              // console.log(res);
+              setCourse(res);
+              setAuthUser(res.userInfo);
+              setTitle(res.title);
+              setDescription(res.description);
+              setTime(res.estimatedTime);
+              setMaterials(res.materialsNeeded);
+            } else {
+              history.push('/forbidden');
+            }
           } else {
             history.push('/notfound');
           }
@@ -112,7 +116,7 @@ const UpdateCourse = () => {
         >
           <div class='main--flex'>
             <div>
-              <label for='courseTitle'>Course Title</label>
+              <label htmlFor='courseTitle'>Course Title</label>
               <input
                 id='courseTitle'
                 name='courseTitle'
@@ -125,7 +129,7 @@ const UpdateCourse = () => {
                 By {authUser.firstName} {authUser.lastName}
               </p>
 
-              <label for='courseDescription'>Course Description</label>
+              <label htmlFor='courseDescription'>Course Description</label>
               <textarea
                 id='courseDescription'
                 name='courseDescription'
@@ -134,7 +138,7 @@ const UpdateCourse = () => {
               ></textarea>
             </div>
             <div>
-              <label for='estimatedTime'>Estimated Time</label>
+              <label htmlFor='estimatedTime'>Estimated Time</label>
               <input
                 id='estimatedTime'
                 name='estimatedTime'
@@ -143,7 +147,7 @@ const UpdateCourse = () => {
                 onChange={change}
               />
 
-              <label for='materialsNeeded'>Materials Needed</label>
+              <label htmlFor='materialsNeeded'>Materials Needed</label>
               <textarea
                 id='materialsNeeded'
                 name='materialsNeeded'

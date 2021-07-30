@@ -88,15 +88,15 @@ module.exports = (sequelize) => {
     {
       sequelize,
       modelName: 'User',
-      hooks: {
-        afterValidate: function(user) {
-          if (user.password === user.confirmPassword) {
-            console.log('theres matching');
-            const salt = bcrypt.genSaltSync(10, 'a');
-            user.password = bcrypt.hashSync(user.password, salt);
-          }
-        },
-      },
+      // hooks: {
+      //   afterValidate: function(user) {
+      //     if (user.password === user.confirmPassword) {
+      //       console.log('theres matching');
+      //       const salt = bcrypt.genSaltSync(10, 'a');
+      //       user.password = bcrypt.hashSync(user.password, salt);
+      //     }
+      //   },
+      // },
     }
   );
 

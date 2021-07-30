@@ -81,22 +81,28 @@ module.exports = (sequelize) => {
           notEmpty: {
             msg: 'Please Confirm Password',
           },
-          // equals: () => User.password,
+          // equals: User.password,
         },
       },
     },
     {
       sequelize,
       modelName: 'User',
-      // hooks: {
-      //   afterValidate: function(user) {
-      //     if (user.password === user.confirmPassword) {
-      //       console.log('theres matching');
-      //       const salt = bcrypt.genSaltSync(10, 'a');
-      //       user.password = bcrypt.hashSync(user.password, salt);
-      //     }
-      //   },
-      // },
+      hooks: {
+        // beforeValidate: function(user) {
+        //   if (user.password !== user.confirmPassword) {
+        //     console.error('error theresone ');
+        //     // throw new Error(400, 'need a match yo');
+        //   }
+        // },
+        afterValidate: function(user) {
+          if (user.password === user.confirmPassword) {
+            console.log('theres matching');
+            const salt = bcrypt.genSaltSync(10, 'a');
+            user.password = bcrypt.hashSync(user.password, salt);
+          }
+        },
+      },
     }
   );
 

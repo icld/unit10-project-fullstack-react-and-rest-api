@@ -15,6 +15,7 @@ import Authenticated from './components/Authenticated';
 import CreateCourse from './components/CreateCourse';
 import UpdateCourse from './components/UpdateCourse';
 import Forbidden from './components/Forbidden';
+import UserSignOut from './components/UserSignOut';
 
 function App(props) {
   return (
@@ -28,6 +29,7 @@ function App(props) {
           <Route path='/courses/:id' component={CourseDetail} />
           <Route path='/signin' component={UserSignIn} />
           <Route path='/signup' component={UserSignUp} />
+          <Route path='/signout' component={UserSignOut} />
           <Route path='/error' component={UnhandledError} />
           <Route path='/forbidden' component={Forbidden} />
 

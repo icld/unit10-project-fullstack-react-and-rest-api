@@ -11,7 +11,6 @@ import UserSignUp from './components/UserSignUp';
 import UserSignIn from './components/UserSignIn';
 import NotFound from './components/NotFound';
 import UnhandledError from './components/UnhandledError';
-import Authenticated from './components/Authenticated';
 import CreateCourse from './components/CreateCourse';
 import UpdateCourse from './components/UpdateCourse';
 import Forbidden from './components/Forbidden';
@@ -33,7 +32,7 @@ function App(props) {
           <Route path='/error' component={UnhandledError} />
           <Route path='/forbidden' component={Forbidden} />
 
-          <Route component={NotFound} />
+          <Route path='/notfound' component={NotFound} />
         </Switch>
       </div>
     </Router>

@@ -1,11 +1,12 @@
 import { useContext, useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { Context } from '../Context/Context';
 import Modal from '../components/Modal';
 
 const UserSignIn = () => {
   const history = useHistory();
-
+  let location = useLocation();
+  const { from } = location.state || { from: { pathname: '/' } };
   const [emailAddress, setEmailAddress] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
@@ -32,12 +33,11 @@ const UserSignIn = () => {
           if (!res) {
             setErrors('Sign-in was unsuccessful');
           } else {
-            history.goBack();
+            history.push(from);
             // toggleModal();
             return null;
           }
         })
-        // .then(() => history.goBack())
         .catch((err) => {
           console.error(err);
           history.push('/error');

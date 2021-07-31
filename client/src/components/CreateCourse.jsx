@@ -50,11 +50,11 @@ const CreateCourse = () => {
             setNewCourseId(newId);
             toggleModal();
           });
-          // .then(() => history.push(`/courses/${newId}`));
         }
       })
       .catch((err) => {
         console.log(err);
+        history.push('/error');
       });
   };
 

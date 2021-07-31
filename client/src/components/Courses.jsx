@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { Context } from '../Context/Context';
 
@@ -8,11 +8,19 @@ const Courses = () => {
   const { data, actions, authenticatedUser } = useContext(Context);
   const [courses, setCourses] = useState([]);
 
+  const history = useHistory();
+
   useEffect(() => {
-    data.getCourses().then((res) => {
-      setCourses(res);
-    });
-  }, [data]);
+    data
+      .getCourses()
+      .then((res) => {
+        setCourses(res);
+      })
+      .catch((err) => {
+        console.log(err);
+        history.push('/error');
+      });
+  }, [data, history]);
 
   return (
     <main>

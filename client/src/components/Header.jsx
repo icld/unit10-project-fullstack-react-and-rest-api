@@ -1,9 +1,10 @@
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Context } from '../Context/Context';
 
 const Header = () => {
   const { authenticatedUser, actions } = useContext(Context);
+  const history = useHistory();
   return (
     <header>
       <div className='wrap header--flex'>

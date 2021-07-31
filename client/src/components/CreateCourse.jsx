@@ -14,7 +14,6 @@ const CreateCourse = () => {
   const [estimatedTime, setTime] = useState();
   const [materialsNeeded, setMaterials] = useState('');
   const [userId] = useState(authenticatedUser[0].id);
-  const [errors, setErrors] = useState([]);
   const [user] = useState(authenticatedUser[0].emailAddress);
   const [pass] = useState(userPassword);
   const [validationErrors, setValidationErrors] = useState([]);
@@ -22,8 +21,6 @@ const CreateCourse = () => {
 
   const [showModal, setShowModal] = useState(false);
   const toggleModal = () => setShowModal(!showModal);
-
-  let newId;
 
   const submit = () => {
     const course = {

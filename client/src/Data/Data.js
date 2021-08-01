@@ -1,6 +1,8 @@
+//API url
 import config from './config';
 
 export default class Data {
+  //API call
   api(
     path,
     method = 'GET',
@@ -17,10 +19,12 @@ export default class Data {
       },
     };
 
+    //convert  body to json string
     if (body !== null) {
       options.body = JSON.stringify(body);
     }
 
+    //encodes credentials
     if (requiresAuth) {
       const encodedCredentials = btoa(
         `${credentials.username}:${credentials.password}`
@@ -30,6 +34,7 @@ export default class Data {
     return fetch(url, options);
   }
 
+  // get a user from api
   async getUser(username, password) {
     const response = await this.api(`/users`, 'GET', null, true, {
       username,
@@ -46,6 +51,7 @@ export default class Data {
     }
   }
 
+  //post a user via api
   async createUser(user) {
     const response = await this.api('/users', 'POST', user);
     if (response.status === 201) {
@@ -60,6 +66,7 @@ export default class Data {
     }
   }
 
+  // GET all courses from api
   async getCourses() {
     const res = await this.api('/courses', 'Get');
     if (res.status === 200) {
@@ -71,6 +78,7 @@ export default class Data {
     }
   }
 
+  // GET a single course from api
   async getCourse(id) {
     const res = await this.api(`/courses/${id}`, 'Get');
 
@@ -85,6 +93,7 @@ export default class Data {
     }
   }
 
+  // POST a course, requires authentication
   async createCourse(course, username, password) {
     const response = await this.api('/courses', 'POST', course, true, {
       username,
@@ -101,6 +110,7 @@ export default class Data {
     }
   }
 
+  //PUT a course, requires authentication
   async updateCourse(id, data, username, password) {
     const response = await this.api(`/courses/${id}`, `PUT`, data, true, {
       username,
@@ -117,6 +127,7 @@ export default class Data {
     }
   }
 
+  //DELETE a course, requires auth
   async deleteCourse(id, username, password) {
     const res = await this.api(`/courses/${id}`, 'DELETE', null, true, {
       username,

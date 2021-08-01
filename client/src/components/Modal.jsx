@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 
 let modalRoot;
 
+// veratile modal component
 const Modal = ({ children }) => {
   modalRoot = modalRoot ? modalRoot : document.getElementById('modal');
 

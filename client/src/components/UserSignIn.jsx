@@ -6,12 +6,15 @@ const UserSignIn = () => {
   const history = useHistory();
   let location = useLocation();
   const { from } = location.state || { from: { pathname: '/' } };
+
+  //state
   const [emailAddress, setEmailAddress] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
 
   const { actions } = useContext(Context);
 
+  //validates form fields before signing in.  returns user to previous or intended page (if rerouted to sign in)
   const handleSubmit = () => {
     if (!password && !emailAddress) {
       setErrors('Please Sign in!');
@@ -26,8 +29,12 @@ const UserSignIn = () => {
           if (!res) {
             setErrors('Sign-in was unsuccessful');
           } else {
-            history.push(from);
-            return null;
+            if (!location.state) {
+              history.goBack();
+            } else {
+              history.push(from);
+              return null;
+            }
           }
         })
         .catch((err) => {

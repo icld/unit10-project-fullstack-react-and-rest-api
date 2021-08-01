@@ -17,33 +17,28 @@ const CourseDetail = (props) => {
 
   const history = useHistory();
 
+  // establishes authorized user
   useEffect(() => {
     if (authenticatedUser) {
       setIsSignedIn(true);
       setUserId(authenticatedUser[0].id);
     }
 
-    // for testing
-    // console.log(isSignedIn);
-    // console.log(userId);
-    // console.log(user.id);
-
-    async function fetchData() {
-      await data
-        .getCourse(id)
-        .then((res) => {
-          if (res) {
-            setCourse(res);
-            setUser(res.userInfo);
-          } else {
-            history.push('/notfound');
-          }
-        })
-        .catch(() => history.push('/error'));
-    }
-    fetchData();
+    //gets course detail
+    data
+      .getCourse(id)
+      .then((res) => {
+        if (res) {
+          setCourse(res);
+          setUser(res.userInfo);
+        } else {
+          history.push('/notfound');
+        }
+      })
+      .catch(() => history.push('/error'));
   }, [data, id, history, authenticatedUser, isSignedIn, userId, user.id]);
 
+  //handle course deletion.
   const deleteCourse = () => {
     data
       .deleteCourse(id, authenticatedUser[0].emailAddress, userPassword)
@@ -59,6 +54,7 @@ const CourseDetail = (props) => {
     <main>
       <div className='actions--bar'>
         <div className='wrap'>
+          {/* if user is the owner of course, render buttons for deletion and  updating.  else don't render these  */}
           {isSignedIn && userId === user.id ? (
             <>
               <Link className='button' to={`/courses/${id}/update`}>

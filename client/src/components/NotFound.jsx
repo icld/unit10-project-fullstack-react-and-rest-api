@@ -1,3 +1,4 @@
+//handles unavailable page errors
 const NotFound = () => (
   <main>
     <div className='wrap'>

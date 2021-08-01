@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Context } from '../Context/Context';
 
+// header component.  shows signed in user or useful routes for signing in or signing up
 const Header = () => {
   const { authenticatedUser, actions } = useContext(Context);
   const history = useHistory();

@@ -9,6 +9,7 @@ const Courses = () => {
 
   const history = useHistory();
 
+  // get all courses
   useEffect(() => {
     data
       .getCourses()

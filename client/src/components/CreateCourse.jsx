@@ -22,6 +22,7 @@ const CreateCourse = () => {
   const [showModal, setShowModal] = useState(false);
   const toggleModal = () => setShowModal(!showModal);
 
+  //handles form submit
   const submit = () => {
     const course = {
       title,
@@ -32,7 +33,8 @@ const CreateCourse = () => {
     };
 
     let newId;
-
+    // create course or return validation errors
+    // establishes new course information for use in modal routing
     data
       .createCourse(course, user, pass)
       .then((response) => {
@@ -149,6 +151,7 @@ const CreateCourse = () => {
           </button>
         </form>
       </div>
+      {/* modal provides routing for the new course */}
       {showModal ? (
         <Modal>
           <h1>Congratulations on creating your New Course!</h1>

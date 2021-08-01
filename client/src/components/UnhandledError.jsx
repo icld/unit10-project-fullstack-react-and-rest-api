@@ -1,4 +1,5 @@
-const Errors = () => (
+// error handler for 500 or other unhandled error occurance
+const UnhandledError = () => (
   <main>
     <div className='wrap'>
       <h2>Error</h2>
@@ -7,4 +8,4 @@ const Errors = () => (
   </main>
 );
 
-export default Errors;
+export default UnhandledError;

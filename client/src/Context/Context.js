@@ -7,14 +7,16 @@ export const Context = React.createContext();
 
 export const Provider = (props) => {
   const data = new Data();
+
+  //state variables.
   const [authenticatedUser, setAuthenticatedUser] = useState(
     Cookies.getJSON('authenticatedUser') || null
   );
-
   const [userPassword, setUserPassword] = useState(
     Cookies.getJSON('userPassword') || null
   );
 
+  //signin function
   const signIn = async (emailAddress, password) => {
     const user = await data.getUser(emailAddress, password);
     //test log user
@@ -29,6 +31,7 @@ export const Provider = (props) => {
     return user;
   };
 
+  //sign out function
   const signOut = () => {
     setAuthenticatedUser(null);
     setUserPassword(null);
@@ -36,6 +39,7 @@ export const Provider = (props) => {
     Cookies.remove('userPassword');
   };
 
+  //passing state and functions for use through context
   const value = {
     authenticatedUser,
     data,

@@ -1,3 +1,5 @@
+// dipsplays when a user is trying to access and unauthorized route
+
 const Forbidden = () => (
   <main>
     <div className='wrap'>

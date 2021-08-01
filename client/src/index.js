@@ -4,6 +4,7 @@ import './styles/reset.css';
 import './styles/global.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+//wrap app in Provider from Context
 import { Provider } from './Context/Context';
 
 ReactDOM.render(

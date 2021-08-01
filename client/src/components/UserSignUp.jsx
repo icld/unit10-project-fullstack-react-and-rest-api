@@ -6,6 +6,7 @@ const UserSignUp = () => {
   const { data, actions } = useContext(Context);
   const history = useHistory();
 
+  // state variables
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [emailAddress, setEmailAddress] = useState('');
@@ -13,9 +14,7 @@ const UserSignUp = () => {
   const [confirmPassword, setConfirmPass] = useState('');
   const [errors, setErrors] = useState([]);
 
-  //text log
-  // console.log(firstName, lastName, emailAddress, password, confirmPassword);
-
+  // handler to be called on form submission
   const handleSubmit = () => {
     const user = {
       firstName,
@@ -25,12 +24,11 @@ const UserSignUp = () => {
       confirmPassword,
     };
 
+    // first, attempt to create user.  throw errors if errors.  then sign in the new user.  reroute back to previous route
     data
       .createUser(user)
       .then((errors) => {
         if (errors.length) {
-          // test errors
-          // console.log(errors);
           setErrors(errors);
         } else {
           actions.signIn(emailAddress, password).then(() => {
@@ -44,6 +42,7 @@ const UserSignUp = () => {
       });
   };
 
+  // handles form values and state as the form is filled out
   const change = (event) => {
     const value = event.target.value;
     switch (event.target.name) {
@@ -66,6 +65,7 @@ const UserSignUp = () => {
         return;
     }
   };
+
   return (
     <main>
       <div className='form--centered'>

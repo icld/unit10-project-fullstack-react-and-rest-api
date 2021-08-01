@@ -21,8 +21,7 @@ const UpdateCourse = () => {
 
   const history = useHistory();
 
-  // console.log(authenticatedUser[0].id);
-
+  // returns individual course if available
   useEffect(() => {
     async function fetchData() {
       await data
@@ -49,6 +48,7 @@ const UpdateCourse = () => {
     fetchData();
   }, [data, id, history, authUser.id, userId]);
 
+  // handles updating of individual course if user is authorized, and pushes to the updated course page
   const submit = () => {
     const course = {
       title,
@@ -64,7 +64,6 @@ const UpdateCourse = () => {
           setErrors(response.errors);
           console.log(response.errors);
         } else {
-          // data.getCourse(id);
           history.push(`/courses/${id}`);
         }
       })
@@ -74,6 +73,7 @@ const UpdateCourse = () => {
       });
   };
 
+  //handles form field changes and state updating
   const change = (event) => {
     const value = event.target.value;
     switch (event.target.name) {

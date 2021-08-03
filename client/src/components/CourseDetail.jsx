@@ -42,12 +42,14 @@ const CourseDetail = (props) => {
   const deleteCourse = () => {
     data
       .deleteCourse(id, authenticatedUser[0].emailAddress, userPassword)
-      .then((res) => {
-        data.getCourses();
+      .then(() => {
         history.push('/');
         console.log('course has been deleted');
       })
-      .catch(() => history.push('/error'));
+      .catch((err) => {
+        console.log(err);
+        history.push('/error');
+      });
   };
 
   return (
@@ -60,7 +62,14 @@ const CourseDetail = (props) => {
               <Link className='button' to={`/courses/${id}/update`}>
                 Update Course
               </Link>
-              <Link className='button' onClick={() => deleteCourse()} to='/'>
+              <Link
+                className='button'
+                onClick={(e) => {
+                  e.preventDefault();
+                  deleteCourse();
+                }}
+                to='/'
+              >
                 Delete Course
               </Link>
             </>

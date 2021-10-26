@@ -25,11 +25,13 @@ app.use(cors());
 app.use(morgan('dev'));
 
 // setup a friendly greeting for the root route
-app.get('/', (req, res) => {
-  res.json({
-    message: 'Welcome to the REST API project!',
-  });
-});
+// app.get('/', (req, res) => {
+//   res.json({
+//     message: 'Welcome to the REST API project!',
+//   });
+// });
+
+app.use(express.static(path.join(__dirname, 'client', 'build'))) // please adapt the path to react if it is different for you!
 
 //add Routes.
 app.use('/api', courseRoutes);

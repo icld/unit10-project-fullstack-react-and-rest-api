@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { Consumer } from '../src/Context/Context';
+import { Consumer } from './Context/Context';
 
 // Higher order component. redirects to sign-in if unauthorized.
 const PrivateRoute = ({ component: Component, ...rest }) => {

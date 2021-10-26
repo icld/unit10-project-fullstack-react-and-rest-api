@@ -6,7 +6,7 @@
 ## Detailed Description
 
 - Project Overview
-  This project is a full-stack application. It is a course library where users can create users, login, and create/update/delete courses. n
+  This project is a full-stack application. It is a course library where users can create users, login, and create/update/delete courses.
 
 ## Technologies Used
 

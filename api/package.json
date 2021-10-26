@@ -5,13 +5,15 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon ./app.js",
-    "seed": "cross-env DB_ENABLE_LOGGING=true node './seed'"
+    "build": "npm run build --prefix client",
+    "seed": "cross-env DB_ENABLE_LOGGING=true node './seed'",
+    "predeploy": "npm run build",
+    "deploy": "vercel --prod"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^6.6.0",
     "nodemon": "^2.0.12",
     "prettier": "^1.19.1",
     "sequelize-cli": "^6.2.0"
@@ -26,6 +28,7 @@
     "prettier-eslint": "^10.1.0",
     "promise.prototype.finally": "^3.1.2",
     "sequelize": "^6.6.5",
-    "sqlite3": "^5.0.0"
+    "sqlite3": "^5.0.0",
+    "vercel": "^23.1.2"
   }
 }
